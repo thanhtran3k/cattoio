@@ -2,7 +2,7 @@
 A basic chat room website. Go to the website, type your username and you're in.
 
 # My notes:
-- In this project. I was using only Socket.io (Real-time framework), ExpressJS and NodeJS, HTML for the front-end.
+- In this project, i was using Socket.io (Real-time framework), ExpressJS and NodeJS, HTML for the front-end.
 - Socket.io going to open connection between the client and the server instead of making request and response. That makes everything pretty much instant.
 - I'm using "server.js" main file instead of "app.js" like used to use in the previous projects.
 - I didn't make a real authentication function in this project, just basically enter username and you're in. I will do it in the future when i have free time.
