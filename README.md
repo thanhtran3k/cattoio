@@ -11,3 +11,9 @@ A basic chat room website. Go to the website, type your username and you're in.
 1. Download my project to your computer.
 2. Install the packages by typing "npm install" on git bash.
 3. Run the the project: "npm start".
+4. The project will run on PORT 3000.
+5. Go to your browser and go to "http://localhost:3000".
+6. Good luck, have fun.
+
+# Make it yours:
+- 
