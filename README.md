@@ -8,3 +8,4 @@ A basic chat room website. Go to the website, type your username and you're in.
 1. Download my project to your computer.
 2. Install the packages by typing "npm install" on git bash.
 3. Run the the project: "npm start".
+4. I didn't make a real authentication function in this application, i will do it in the future when i have free time.
