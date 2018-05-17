@@ -1,0 +1,16 @@
+{
+  "name": "cattoio",
+  "version": "1.0.0",
+  "description": "This is an socket.io application, nothing much.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Thanh Tran",
+  "license": "ISC",
+  "dependencies": {
+    "socket.io": "*",
+    "express": "*"
+  }
+}
