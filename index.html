@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>    
+    <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Oswald">
+    <script type="text/javascript" src="javascripts/bootstrap.js"></script>    
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+    <title>Catto IO - Chat application</title>
+</head>
+<body>
+    <div id="container">
+        <form id="userForm">
+
+            <div id="error"></div>
+
+            <h1>Catto IO</h1>
+            <div class="form-group">
+                <label for="InputUsername">Username</label>
+                <input type="text" class="form-control" placeholder="Enter your username here." id="username">
+                <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <button type="submit" class="btn btn-secondary btn-lg btn-block">Submit</button>
+        </form>
+    </div>
+
+    <div id="chatContainer">
+        <form id="chatForm">
+            <div class="form-group">
+                <h1>Catto IO</h1>
+                <label for="chat">Your chat:</label>
+                <div id="chatWindow"></div>
+            </div>
+
+            <div class="input-group">
+               <input type="text" id="message" class="form-control" placeholder="Say something...">
+               <span class="input-group-btn">
+                    <input class="btn btn-default" type="submit" value="Send">
+               </span>
+            </div>
+        </form>
+
+        <div id="userWrapper">            
+            <div id="users">                
+            </div>
+        </div>
+    </div>
+
+    <script src="http://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        $(function(){
+            var socket = io.connect();
+            var $chatForm = $('#chatForm');
+            var $message = $('#message');
+            var $chatWindow = $('#chatWindow');
+            var $userForm = $('#userForm');
+            var $users = $('#users');
+            var $username = $('#username');
+            var $error = $('#error');
+
+            $userForm.submit(function(e){
+                e.preventDefault();
+                //console.log('Submitted');
+                socket.emit('new user', $username.val(), function(data){
+                    if(data){
+                        $('#container').hide();
+                        $('#chatContainer').show();
+                    }else{
+                        $error.html('Username is taken');
+                    }
+                });
+            });
+
+            //username
+            socket.on('usernames', function(data){
+                var html = '';
+                for(i = 0; i <data.length; i++){
+                    html += data[i] + '<br/>';
+                }
+                $users.html(html);
+            });
+
+            $chatForm.submit(function(e){
+                e.preventDefault();
+                //console.log('Submitted');
+                socket.emit('send message', $message.val());
+                //clear
+                $message.val('');
+            });
+
+            socket.on('new message',function(data){
+                $chatWindow.append('<strong>'+ data.user +'</strong>: ' + data.msg + '<br>');
+            });
+        });        
+    </script>
+</body>
+</html>
